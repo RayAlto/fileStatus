@@ -8,7 +8,8 @@
 #include <unistd.h>
 #include <limits.h>
 #include <stdlib.h>
-#include <stdexcept>
+
+#include "Exceptions.hpp"
 
 class FileStatus {
 private:

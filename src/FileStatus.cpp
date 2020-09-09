@@ -5,28 +5,28 @@ void FileStatus::getStat(const std::string& fileName, struct stat& statStruct) {
     if (stat(absolutePath.c_str(), &statStruct) != 0) {
         switch (errno) {
         case EACCES:
-            throw std::runtime_error("Search permission is denied for one of the directories in the path prefix of" + fileName);
+            throw PermissionError("Search permission is denied for one of the directories in the path prefix of" + fileName);
             break;
         case EFAULT:
-            throw std::runtime_error("Buff got a bad address");
+            throw FaultError("Buff got a bad address");
             break;
         case ELOOP:
-            throw std::runtime_error("Too many symbolic links encountered while traversing the path.");
+            throw LoopError("Too many symbolic links encountered while traversing the path.");
             break;
         case ENAMETOOLONG:
-            throw std::runtime_error("File name is too long.");
+            throw NameTooLongError("File name is too long.");
             break;
         case ENOENT:
-            throw std::runtime_error("A component of " + absolutePath + " does not exist or is a dangling symbolic link.");
+            throw DoesNotExistsError("A component of " + absolutePath + " does not exist or is a dangling symbolic link.");
             break;
         case ENOMEM:
-            throw std::runtime_error("Out of memory.");
+            throw MemoryError("Out of memory.");
             break;
         case ENOTDIR:
-            throw std::runtime_error("A component of the path prefix of " + absolutePath + " is not a directory.");
+            throw NotDirectoryError("A component of the path prefix of " + absolutePath + " is not a directory.");
             break;
         case EOVERFLOW:
-            throw std::runtime_error("The info of " + absolutePath + " is beyond the range that can be represented.");
+            throw OverflowError("The info of " + absolutePath + " is beyond the range that can be represented.");
             break;
         }
     }
@@ -41,28 +41,28 @@ std::string FileStatus::toAbsolutePath(const std::string& relativePath) {
     if (realpath(relativePath.c_str(), absolutePath) == NULL) {
         switch (errno) {
         case EACCES:
-            throw std::runtime_error("Read or search permission was denied for a component of the path prefix.");
+            throw PermissionError("Read or search permission was denied for a component of the path prefix.");
             break;
         case EIO:
-            throw std::runtime_error("An I/O error occurred while reading from the filesystem.");
+            throw IOError("An I/O error occurred while reading from the filesystem.");
             break;
         case ELOOP:
-            throw std::runtime_error("Too many symbolic links were encountered in translating the pathname.");
+            throw LoopError("Too many symbolic links were encountered in translating the pathname.");
             break;
         case ENAMETOOLONG:
-            throw std::runtime_error("A component of a pathname exceeded NAME_MAX characters, or an entire pathname exceeded PATH_MAX characters.");
+            throw NameTooLongError("A component of a pathname exceeded NAME_MAX characters, or an entire pathname exceeded PATH_MAX characters.");
             break;
         case ENOENT:
-            throw std::runtime_error("File \"" + relativePath + "\" does not exist.");
+            throw DoesNotExistsError("File \"" + relativePath + "\" does not exist.");
             break;
         case ENOMEM:
-            throw std::runtime_error("Out of memory.");
+            throw MemoryError("Out of memory.");
             break;
         case ENOTDIR:
-            throw std::runtime_error("A component of the path prefix is not a directory.");
+            throw NotDirectoryError("A component of the path prefix is not a directory.");
             break;
         default:
-            throw std::runtime_error("Unknown error.");
+            throw UnknownError();
             break;
         }
     }
@@ -74,28 +74,28 @@ std::string FileStatus::getCurrentDirectoryName() {
     if (getcwd(currentDirectoryName, sizeof(currentDirectoryName)) == NULL) {
         switch (errno) {
         case EACCES:
-            throw std::runtime_error("Permission to read or search a component of current directory was denied.");
+            throw PermissionError("Permission to read or search a component of current directory was denied.");
             break;
         case EFAULT:
-            throw std::runtime_error("Buff got a bad address.");
+            throw FaultError("Buff got a bad address.");
             break;
         case EINVAL:
-            throw std::runtime_error("Marco FILENAME_MAX expands to 0.");
+            throw InvalidError("Marco FILENAME_MAX expands to 0.");
             break;
         case ENAMETOOLONG:
-            throw std::runtime_error("The size of the null-terminated absolute pathname string exceeds PATH_MAX bytes.");
+            throw NameTooLongError("The size of the null-terminated absolute pathname string exceeds PATH_MAX bytes.");
             break;
         case ENOENT:
-            throw std::runtime_error("The current working directory has been unlinked.");
+            throw DoesNotExistsError("The current working directory has been unlinked.");
             break;
         case ENOMEM:
-            throw std::runtime_error("Out of memory.");
+            throw MemoryError("Out of memory.");
             break;
         case ERANGE:
-            throw std::runtime_error("The length of absolute path is too long.");
+            throw RangeError("The length of absolute path is too long.");
             break;
         default:
-            throw std::runtime_error("Unknown error.");
+            throw UnknownError();
             break;
         }
     }
