@@ -102,126 +102,126 @@ std::string FileStatus::getCurrentDirectoryName() {
     return currentDirectoryName;
 }
 
-dev_t FileStatus::getDeviceId() const {
+dev_t FileStatus::getDeviceId() const noexcept {
     return _status.st_dev;
 }
 
-ino_t FileStatus::getInodeNumber() const {
+ino_t FileStatus::getInodeNumber() const noexcept {
     return _status.st_ino;
 }
 
-mode_t FileStatus::getTypeAndMode() const {
+mode_t FileStatus::getTypeAndMode() const noexcept {
     return _status.st_mode;
 }
 
-nlink_t FileStatus::getHardLinksNumber() const {
+nlink_t FileStatus::getHardLinksNumber() const noexcept {
     return _status.st_nlink;
 }
 
-uid_t FileStatus::getUid() const {
+uid_t FileStatus::getUid() const noexcept {
     return _status.st_uid;
 }
 
-gid_t FileStatus::getGid() const {
+gid_t FileStatus::getGid() const noexcept {
     return _status.st_gid;
 }
 
-off_t FileStatus::getSize() const {
+off_t FileStatus::getSize() const noexcept {
     return _status.st_size;
 }
 
-blksize_t FileStatus::getBlockSize() const {
+blksize_t FileStatus::getBlockSize() const noexcept {
     return _status.st_blksize;
 }
 
-blkcnt_t FileStatus::getBlockCount() const {
+blkcnt_t FileStatus::getBlockCount() const noexcept {
     return _status.st_blocks;
 }
 
-time_t FileStatus::getLastAccessTimeSec() const {
+time_t FileStatus::getLastAccessTimeSec() const noexcept {
     return _status.st_atim.tv_sec;
 }
 
-time_t FileStatus::getLastModificationTimeSec() const {
+time_t FileStatus::getLastModificationTimeSec() const noexcept {
     return _status.st_mtim.tv_sec;
 }
 
-time_t FileStatus::getLastStatusChangeTimeSec() const {
+time_t FileStatus::getLastStatusChangeTimeSec() const noexcept {
     return _status.st_ctim.tv_sec;
 }
 
-long FileStatus::getLastAccessTimeNanoSec() const {
+long FileStatus::getLastAccessTimeNanoSec() const noexcept {
     return _status.st_atim.tv_nsec;
 }
 
-long FileStatus::getLastModificationTimeNanoSec() const {
+long FileStatus::getLastModificationTimeNanoSec() const noexcept {
     return _status.st_mtim.tv_nsec;
 }
 
-long FileStatus::getLastStatusChangeTimeNanoSec() const {
+long FileStatus::getLastStatusChangeTimeNanoSec() const noexcept {
     return _status.st_ctim.tv_nsec;
 }
 
-bool FileStatus::isSocket() const {
+bool FileStatus::isSocket() const noexcept {
     return S_ISSOCK(_status.st_mode);
 }
 
-bool FileStatus::isSymbolLink() const {
+bool FileStatus::isSymbolLink() const noexcept {
     return S_ISLNK(_status.st_mode);
 }
 
-bool FileStatus::isRegularFile() const {
+bool FileStatus::isRegularFile() const noexcept {
     return S_ISREG(_status.st_mode);
 }
 
-bool FileStatus::isBlockDevice() const {
+bool FileStatus::isBlockDevice() const noexcept {
     return S_ISBLK(_status.st_mode);
 }
 
-bool FileStatus::isDirectory() const {
+bool FileStatus::isDirectory() const noexcept {
     return S_ISDIR(_status.st_mode);
 }
 
-bool FileStatus::isCharacterDevice() const {
+bool FileStatus::isCharacterDevice() const noexcept {
     return S_ISCHR(_status.st_mode);
 }
 
-bool FileStatus::ifFIFO() const {
+bool FileStatus::isFIFO() const noexcept {
     return S_ISFIFO(_status.st_mode);
 }
 
-bool FileStatus::ownerHasReadPermission() const {
+bool FileStatus::ownerHasReadPermission() const noexcept {
     return ((_status.st_mode & S_IRUSR) == S_IRUSR);
 }
 
-bool FileStatus::ownerHasWritePermission() const {
+bool FileStatus::ownerHasWritePermission() const noexcept {
     return ((_status.st_mode & S_IWUSR) == S_IWUSR);
 }
 
-bool FileStatus::ownerHasExecutePermission() const {
+bool FileStatus::ownerHasExecutePermission() const noexcept {
     return ((_status.st_mode & S_IXUSR) == S_IXUSR);
 }
 
-bool FileStatus::groupHasReadPermission() const {
+bool FileStatus::groupHasReadPermission() const noexcept {
     return ((_status.st_mode & S_IRGRP) == S_IRGRP);
 }
 
-bool FileStatus::groupHasWritePermission() const {
+bool FileStatus::groupHasWritePermission() const noexcept {
     return ((_status.st_mode & S_IWGRP) == S_IWGRP);
 }
 
-bool FileStatus::groupHasExecutePermission() const {
+bool FileStatus::groupHasExecutePermission() const noexcept {
     return ((_status.st_mode & S_IXGRP) == S_IXGRP);
 }
 
-bool FileStatus::othersHasReadPermission() const {
+bool FileStatus::othersHasReadPermission() const noexcept {
     return ((_status.st_mode & S_IROTH) == S_IROTH);
 }
 
-bool FileStatus::othersHasWritePermission() const {
+bool FileStatus::othersHasWritePermission() const noexcept {
     return ((_status.st_mode & S_IWOTH) == S_IWOTH);
 }
 
-bool FileStatus::othersHasExecutePermission() const {
+bool FileStatus::othersHasExecutePermission() const noexcept {
     return ((_status.st_mode & S_IXOTH) == S_IXOTH);
 }
